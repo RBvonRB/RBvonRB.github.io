@@ -1,6 +1,45 @@
 <!DOCTYPE html>
 <html>
-<body>
-<h1>I am mooncalendar</h1>
-</body>
+  <head>
+    <title>AR Application - Display Today's Date</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/jeromeetienne/ar.js@3.3.2/aframe/build/aframe-ar.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <a-scene embedded arjs>
+      <!-- Marker Definition -->
+      <a-marker 
+        preset="custom" 
+        type="pattern" 
+        url="./assets/marker/pattern-marker.patt">
+        <!-- 3D Text to Display Today's Date -->
+        <a-entity 
+          id="dateText"
+          geometry="primitive: plane; height: 1; width: 3"
+          material="color: #00FF00; side: double"
+          position="0 0.5 0"
+          text="align: center; width: 4; color: black; value: Loading...">
+        </a-entity>
+      </a-marker>
+
+      <!-- AR.js Camera -->
+      <a-entity camera></a-entity>
+    </a-scene>
+
+    <script>
+      // Update the text entity with today's date
+      document.addEventListener('DOMContentLoaded', () => {
+        const dateEntity = document.querySelector('#dateText');
+        const today = new Date();
+        const formattedDate = today.toDateString(); // e.g., "Wed Nov 27 2024"
+        dateEntity.setAttribute('text', 'value', formattedDate);
+      });
+    </script>
+  </body>
 </html>
