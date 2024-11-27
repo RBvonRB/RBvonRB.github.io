@@ -9,15 +9,31 @@
         margin: 0;
         overflow: hidden;
       }
+      #error-message {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 18px;
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 20px;
+        border-radius: 8px;
+      }
     </style>
   </head>
   <body>
+    <div id="error-message">
+      Please allow camera access to use the AR application.
+    </div>
+
     <a-scene embedded arjs>
       <!-- Marker Definition -->
       <a-marker 
         preset="custom" 
         type="pattern" 
-        url="./assets/marker/pattern-marker.patt">
+        url="./marker.patt">
         <!-- Indicator for Pattern Recognition -->
         <a-box 
           position="0 0.5 0" 
@@ -28,5 +44,19 @@
       <!-- AR.js Camera -->
       <a-entity camera></a-entity>
     </a-scene>
+
+    <script>
+      // Check if AR.js initializes properly
+      document.querySelector('a-scene').addEventListener('loaded', () => {
+        console.log('AR.js is ready');
+        document.getElementById('error-message').style.display = 'none';
+      });
+
+      // Handle camera errors
+      navigator.mediaDevices.getUserMedia({ video: true }).catch((err) => {
+        console.error('Camera access error:', err);
+        document.getElementById('error-message').style.display = 'block';
+      });
+    </script>
   </body>
 </html>
