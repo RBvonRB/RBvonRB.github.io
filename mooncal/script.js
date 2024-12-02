@@ -26,20 +26,28 @@ function formatDateForAPI(date) {
     return `${year}-${month}-${day}`;
 }
 
+function formatDateForDisplay(date) {
+    const day = String(date.getDate()).padStart(2, '0'); // Ensure 2 digits
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+    const year = date.getFullYear();
+    return `${day}.${month}.${year}`;
+}
+
+
 // Function to get moon phase name based on normalized moon phase value
 function getMoonPhaseName(normalizedPhase) {
     if (normalizedPhase === 0) {
         return 'Neumond';
     } else if (normalizedPhase > 0 && normalizedPhase < 0.25) {
-        return 'Zunehmender Sichelmond';
-    } else if (normalizedPhase === 0.25) {
         return 'Erstes Viertel';
+    } else if (normalizedPhase === 0.25) {
+        return 'Zunehmender Halbmond';
     } else if (normalizedPhase > 0.25 && normalizedPhase < 0.5) {
-        return 'Zunehmender Mond';
+        return 'Zweites Viertel';
     } else if (normalizedPhase === 0.5) {
         return 'Vollmond';
     } else if (normalizedPhase > 0.5 && normalizedPhase < 0.75) {
-        return 'Abnehmender Mond';
+        return 'Drittes Viertel';
     } else if (normalizedPhase === 0.75) {
         return 'Letztes Viertel';
     } else if (normalizedPhase > 0.75 && normalizedPhase < 1) {
@@ -102,6 +110,10 @@ async function fetchMoonPhase(location, date, apiKey) {
     return null; // Default to null if fetching fails
 }
 
+function getMoonPhasePercentage(normalizedPhase) {
+    return Math.round(normalizedPhase * 100); // Convert to percentage and round off
+}
+
 // Initialize the page
 async function initialize() {
     const queryDate = getQueryParam('date');
@@ -115,16 +127,21 @@ async function initialize() {
     if (apiMoonPhase !== null) {
         const moonPhaseName = getMoonPhaseName(apiMoonPhase);
         const moonPhaseImage = getMoonPhaseImage(apiMoonPhase);
+        const moonPhasePercentage = getMoonPhasePercentage(apiMoonPhase);
 
         // Update the UI with the moon phase data
         document.getElementById('moonPhaseImage').src = moonPhaseImage;
-        document.getElementById('moonPhaseText').innerText = moonPhaseName;
+        const moonPhaseTextElement = document.getElementById('moonPhaseText');
+        moonPhaseTextElement.innerHTML = `${moonPhaseName}<br>${moonPhasePercentage}%`;
+
     } else {
         document.getElementById('moonPhaseText').innerText = 'Unable to fetch moon phase.';
     }
 
     // Display the selected date
-    document.getElementById('date').innerText = selectedDate.toDateString();
+    const formattedDate = formatDateForDisplay(selectedDate);
+    document.getElementById('date').innerText = formattedDate;
+
 
     // Generate stars in the background
     const canvas = document.getElementById('backgroundCanvas');

@@ -12,6 +12,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'PPRaderThin';
+  src: url('assets/fonts/ppRader/PPRader-Thin.woff') format('woff');
+  font-weight: lighter;
+  font-style: normal;
+}
+
 body {
   margin: 0;
   font-family: 'PPRader', sans-serif;
@@ -27,7 +34,6 @@ body {
 }
 
 
-/* Left-aligned title */
 h1 {
   position: absolute;
   top: 20px;
@@ -35,28 +41,22 @@ h1 {
   letter-spacing: .1em;
   font-size: 11vw;
   font-family: 'PPRader', sans-serif;
-  /* text-align: left; */
   opacity: 0;
   animation: fadeIn .7s ease forwards;
 }
 
 
 h2 {
-  font-family: 'PPRader', sans-serif;
+  font-family: 'PPRaderThin', sans-serif;
   opacity: 0;
+  letter-spacing: .1em;
   animation: fadeIn 1s ease forwards;
-  /* animation-delay: 1s; */
 }
 
 
 #date{
-  animation-delay: 1s
+  animation-delay: .2s
 }
-
-#moonPhaseText {
-  animation-delay: 1.2s;
-}
-
 
 
 /* Moon image styles */
@@ -67,8 +67,13 @@ h2 {
   opacity: 0;
   transform: scale(0.8);
   animation: fadeZoomIn 2s ease forwards;
-  animation-delay: 1.5s; /* Delay after titles */
+  animation-delay: .5s; /* Delay after titles */
 }
+
+#moonPhaseText {
+  animation-delay: .7s;
+}
+
 
 canvas {
   position: absolute;
