@@ -1,140 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Today's Date and Moon Phase</title>
-  <style>
-    @font-face {
-      font-family: 'PPRader';
-      src: url('assets/fonts/ppRader/PPRader-Regular.woff') format('woff');
-      font-weight: normal;
-      font-style: normal;
-    }
-
-    @font-face {
-      font-family: 'PPRaderBold';
-      src: url('assets/fonts/ppRader/PPRader-Bold.woff') format('woff');
-      font-weight: bold;
-      font-style: normal;
-    }
-
-    body {
-      margin: 0;
-      font-family: 'PPRader', sans-serif;
-      background: radial-gradient(circle, #0b1e38, #040b1a);
-      color: #ffffff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      flex-direction: column;
-      text-align: center;
-      overflow: hidden;
-    }
-
-    h1 {
-      font-size: 2.5em;
-      margin: 0.5em 0;
-      font-family: 'PPRaderBold', sans-serif;
-    }
-
-    p {
-      font-size: 1.2em;
-      margin: 0.2em 0;
-    }
-
-    #moonPhaseImage {
-      width: 200px;
-      height: 200px;
-      margin-top: 1em;
-    }
-
-    canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
-  </style>
+  <title>Mondkalender</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <h1>Today's Date</h1>
-  <p id="date">Loading...</p>
-  <h1>Moon Phase</h1>
+  <h1 id="date">Loading...</h1>
+  <h1 id="moonPhaseText">Laden...</h1>
   <img id="moonPhaseImage" src="" alt="Moon Phase" />
-
   <canvas id="backgroundCanvas"></canvas>
-
-  <script>
-    // Function to get today's date
-    function getTodaysDate() {
-      const today = new Date();
-      return today.toDateString();
-    }
-
-    // Function to calculate the moon phase
-    function calculateMoonPhase() {
-      const today = new Date();
-      const newMoon = new Date('2024-12-01T00:00:00Z'); // New moon reference
-      const lunarCycleDays = 29.53059; // Length of a lunar cycle in days
-
-      // Days since the reference new moon
-      const daysSinceNewMoon = (today - newMoon) / (1000 * 60 * 60 * 24);
-      const normalizedPhase = (daysSinceNewMoon % lunarCycleDays) / lunarCycleDays;
-
-      // Normalize to range [0, 1]
-      return normalizedPhase < 0 ? normalizedPhase + 1 : normalizedPhase;
-    }
-
-    // Function to determine the closest moon phase image
-    function getMoonPhaseImage(normalizedPhase) {
-      const totalImages = 30; // Total number of images (moonphase_1.png to moonphase_30.png)
-      const closestIndex = Math.round(normalizedPhase * (totalImages - 1)) + 1; // Closest image index (1-based)
-      return `assets/images/moonphases/moonphase_${closestIndex}.png`;
-    }
-
-    // Function to generate starry background
-    function generateStars(canvas) {
-      const ctx = canvas.getContext('2d');
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-
-      // Draw stars
-      const starCount = 200;
-      for (let i = 0; i < starCount; i++) {
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * canvas.height;
-        const radius = Math.random() * 1.5;
-        const alpha = Math.random() * 0.8 + 0.2; // Opacity
-        ctx.beginPath();
-        ctx.arc(x, y, radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
-        ctx.fill();
-      }
-    }
-
-    // Initialize the page
-    function initialize() {
-      // Set today's date
-      document.getElementById('date').innerText = getTodaysDate();
-
-      // Calculate moon phase and set image
-      const moonPhase = calculateMoonPhase();
-      const moonPhaseImage = getMoonPhaseImage(moonPhase);
-      document.getElementById('moonPhaseImage').src = moonPhaseImage;
-
-      // Generate stars in the background
-      const canvas = document.getElementById('backgroundCanvas');
-      generateStars(canvas);
-
-      // Adjust stars on window resize
-      window.addEventListener('resize', () => generateStars(canvas));
-    }
-
-    initialize();
-  </script>
+  <script src="script.js"></script>
 </body>
+
 </html>
