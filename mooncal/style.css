@@ -1,53 +1,103 @@
 @font-face {
-    font-family: 'PPRader';
-    src: url('assets/fonts/ppRader/PPRader-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-  }
+  font-family: 'PPRader';
+  src: url('assets/fonts/ppRader/PPRader-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 
-  @font-face {
-    font-family: 'PPRaderBold';
-    src: url('assets/fonts/ppRader/PPRader-Bold.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-  }
+@font-face {
+  font-family: 'PPRaderBold';
+  src: url('assets/fonts/ppRader/PPRader-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
 
-  body {
-    margin: 0;
-    font-family: 'PPRader', sans-serif;
-    background: radial-gradient(circle, #0b1e38, #040b1a);
-    color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column;
-    text-align: center;
-    overflow: hidden;
-  }
+body {
+  margin: 0;
+  font-family: 'PPRader', sans-serif;
+  background: radial-gradient(circle, #02040f, #000000);
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  text-align: center;
+  overflow: hidden;
+}
 
-  h1 {
-    font-size: 2.5em;
-    margin: 0.5em 0;
-    font-family: 'PPRaderBold', sans-serif;
-  }
 
-  p {
-    font-size: 1.2em;
-    margin: 0.2em 0;
-  }
+/* Left-aligned title */
+h1 {
+  position: absolute;
+  top: 20px;
+  text-transform:uppercase;
+  letter-spacing: .1em;
+  font-size: 11vw;
+  font-family: 'PPRader', sans-serif;
+  /* text-align: left; */
+  opacity: 0;
+  animation: fadeIn .7s ease forwards;
+}
 
-  #moonPhaseImage {
-    width: 200px;
-    height: 200px;
-    margin-top: 1em;
-  }
 
-  canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+h2 {
+  font-family: 'PPRader', sans-serif;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  /* animation-delay: 1s; */
+}
+
+
+#date{
+  animation-delay: 1s
+}
+
+#moonPhaseText {
+  animation-delay: 1.2s;
+}
+
+
+
+/* Moon image styles */
+#moonPhaseImage {
+  width: 200px;
+  height: 200px;
+  margin-top: 1em;
+  opacity: 0;
+  transform: scale(0.8);
+  animation: fadeZoomIn 2s ease forwards;
+  animation-delay: 1.5s; /* Delay after titles */
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+      transform: translateY(-20px);
   }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+@keyframes fadeZoomIn {
+  0% {
+      opacity: 0;
+      transform: scale(0.8);
+  }
+  100% {
+      opacity: 1;
+      transform: scale(1);
+  }
+}

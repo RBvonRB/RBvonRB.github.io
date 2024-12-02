@@ -29,23 +29,23 @@ function formatDateForAPI(date) {
 // Function to get moon phase name based on normalized moon phase value
 function getMoonPhaseName(normalizedPhase) {
     if (normalizedPhase === 0) {
-        return 'New Moon';
+        return 'Neumond';
     } else if (normalizedPhase > 0 && normalizedPhase < 0.25) {
-        return 'Waxing Crescent';
+        return 'Zunehmender Sichelmond';
     } else if (normalizedPhase === 0.25) {
-        return 'First Quarter';
+        return 'Erstes Viertel';
     } else if (normalizedPhase > 0.25 && normalizedPhase < 0.5) {
-        return 'Waxing Gibbous';
+        return 'Zunehmender Mond';
     } else if (normalizedPhase === 0.5) {
-        return 'Full Moon';
+        return 'Vollmond';
     } else if (normalizedPhase > 0.5 && normalizedPhase < 0.75) {
-        return 'Waning Gibbous';
+        return 'Abnehmender Mond';
     } else if (normalizedPhase === 0.75) {
-        return 'Last Quarter';
+        return 'Letztes Viertel';
     } else if (normalizedPhase > 0.75 && normalizedPhase < 1) {
-        return 'Waning Crescent';
+        return 'Abnehmender Sichelmond';
     }
-    return 'Unknown Phase';
+    return 'Neumond';
 }
 
 // Function to determine the closest moon phase image
