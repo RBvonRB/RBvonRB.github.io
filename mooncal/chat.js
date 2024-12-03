@@ -1,5 +1,5 @@
 async function getChatGPTResponse(prompt) {
-    const url = `https://mooncalendar.glitch.me/api/chatgpt`;
+    const url = `https://mooncalendar.glitch.me/api/openai`;
   
     try {
       const response = await fetch(url, {
