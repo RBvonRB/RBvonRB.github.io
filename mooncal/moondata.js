@@ -63,25 +63,6 @@ function getMoonPhaseImage(normalizedPhase) {
     return `assets/images/moonphases/moonphase_${closestIndex}.png`;
 }
 
-// Function to generate starry background
-function generateStars(canvas) {
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    // Draw stars
-    const starCount = 200;
-    for (let i = 0; i < starCount; i++) {
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * canvas.height;
-        const radius = Math.random() * 1.5;
-        const alpha = Math.random() * 0.8 + 0.2; // Opacity
-        ctx.beginPath();
-        ctx.arc(x, y, radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
-        ctx.fill();
-    }
-}
 
 // Function to fetch moon phase data from the API
 async function fetchMoonPhase(location, date, apiKey) {
@@ -144,8 +125,8 @@ async function initialize() {
 
 
     // Generate stars in the background
-    const canvas = document.getElementById('backgroundCanvas');
-    generateStars(canvas);
+    // const canvas = document.getElementById('backgroundCanvas');
+    // generateStars(canvas);
 
     // Adjust stars on window resize
     window.addEventListener('resize', () => generateStars(canvas));
