@@ -79,8 +79,6 @@ async function fetchMoonPhase(location, date) {
     return null;
 }
 
-
-
 function getMoonPhasePercentage(normalizedPhase) {
     return Math.round(normalizedPhase * 100); // Convert to percentage and round off
 }
@@ -91,10 +89,9 @@ async function initialize() {
     const selectedDate = parseDate(queryDate);
     const dateForApi = formatDateForAPI(selectedDate);
     const location = getQueryParam('location') || 'Zurich, Switzerland'; // Default location
-    const apiKey = 'ABCDEFGHIJK'; // Replace with your actual API key
 
     // Fetch the moon phase from the API
-    const apiMoonPhase = await fetchMoonPhase(location, dateForApi, apiKey);
+    const apiMoonPhase = await fetchMoonPhase(location, dateForApi);
     if (apiMoonPhase !== null) {
         const moonPhaseName = getMoonPhaseName(apiMoonPhase);
         const moonPhaseImage = getMoonPhaseImage(apiMoonPhase);
