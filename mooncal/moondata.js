@@ -63,28 +63,22 @@ function getMoonPhaseImage(normalizedPhase) {
     return `assets/images/moonphases/moonphase_${closestIndex}.png`;
 }
 
-// Function to fetch moon phase data from the proxy server
 async function fetchMoonPhase(location, date) {
     const url = `https://mooncalendar.glitch.me/api/moonphase?location=${encodeURIComponent(location)}&date=${encodeURIComponent(date)}`;
-    console.log("Fetching Moon Phase with URL:", url);
-
     try {
         const response = await fetch(url);
         if (!response.ok) {
             throw new Error(`Error: ${response.statusText}`);
         }
-
         const data = await response.json();
         console.log("Moon phase data received:", data);
-
-        // Return the moon phase from the server's response
         return data.moonphase;
     } catch (error) {
         console.error("Failed to fetch moon phase:", error);
     }
-
-    return null; // Default to null if fetching fails
+    return null;
 }
+
 
 
 function getMoonPhasePercentage(normalizedPhase) {
