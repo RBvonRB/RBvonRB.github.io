@@ -63,11 +63,10 @@ function getMoonPhaseImage(normalizedPhase) {
     return `assets/images/moonphases/moonphase_${closestIndex}.png`;
 }
 
-
-// Function to fetch moon phase data from the API
-async function fetchMoonPhase(location, date, apiKey) {
-    const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/${date}?unitGroup=us&key=${apiKey}&contentType=json`;
-    console.log("Fetching API with URL:", url);
+// Function to fetch moon phase data from the proxy server
+async function fetchMoonPhase(location, date) {
+    const url = `https://mooncalendar.glitch.me/api/moonphase?location=${encodeURIComponent(location)}&date=${encodeURIComponent(date)}`;
+    console.log("Fetching Moon Phase with URL:", url);
 
     try {
         const response = await fetch(url);
@@ -76,20 +75,17 @@ async function fetchMoonPhase(location, date, apiKey) {
         }
 
         const data = await response.json();
-        console.log("API response:", data);
+        console.log("Moon phase data received:", data);
 
-        // Extract moon phase for the specified day
-        const dayData = data.days[0]; // Assuming the first day's data matches the queried date
-        if (dayData && dayData.moonphase !== undefined) {
-            console.log("Moon phase found:", dayData.moonphase);
-            return dayData.moonphase; // Return the normalized moon phase (0 - 1)
-        }
+        // Return the moon phase from the server's response
+        return data.moonphase;
     } catch (error) {
-        console.error('Failed to fetch moon phase:', error);
+        console.error("Failed to fetch moon phase:", error);
     }
 
     return null; // Default to null if fetching fails
 }
+
 
 function getMoonPhasePercentage(normalizedPhase) {
     return Math.round(normalizedPhase * 100); // Convert to percentage and round off
@@ -101,7 +97,7 @@ async function initialize() {
     const selectedDate = parseDate(queryDate);
     const dateForApi = formatDateForAPI(selectedDate);
     const location = getQueryParam('location') || 'Zurich, Switzerland'; // Default location
-    const apiKey = 'B4FASJ2YJX3Z2PNFJSJV4GLBE'; // Replace with your actual API key
+    const apiKey = 'ABCDEFGHIJK'; // Replace with your actual API key
 
     // Fetch the moon phase from the API
     const apiMoonPhase = await fetchMoonPhase(location, dateForApi, apiKey);
