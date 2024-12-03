@@ -122,14 +122,6 @@ async function initialize() {
     // Display the selected date
     const formattedDate = formatDateForDisplay(selectedDate);
     document.getElementById('date').innerText = formattedDate;
-
-
-    // Generate stars in the background
-    // const canvas = document.getElementById('backgroundCanvas');
-    // generateStars(canvas);
-
-    // Adjust stars on window resize
-    window.addEventListener('resize', () => generateStars(canvas));
 }
 
 initialize();
