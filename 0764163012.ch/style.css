@@ -1,0 +1,173 @@
+:root {
+  --pos1: 1%;
+  --pos2: 26%;
+  --pos3: 51%;
+  --pos4: 76%;
+  --topColumn: 160px;
+  --bottomMarg: 20px;
+}
+
+@font-face {
+  font-family: "universRoman";
+  src: url(../assets/fonts/universRom.otf);
+}
+
+html {
+  font-size: 20px;
+  font-family: universRoman;
+}
+
+a {
+  color: black;
+}
+
+h1{
+  font-size: 20px;
+  font-weight: 400;
+  text-decoration-line: underline;
+}
+
+.desktop {
+  display: block;
+}
+
+
+.column h1 {
+  cursor: pointer;
+}
+
+#close:hover {
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  /* text-decoration: underline black; */
+  line-height: 2;
+  padding-left: 0;
+}  
+
+#projectsCont {
+  display: none;
+  z-index: 10;
+}
+
+.projLink {
+  text-decoration: underline black;
+}
+
+.projLink:hover {
+  cursor: pointer;
+}
+
+#wortmarke {
+  position: fixed;
+  left: var(--pos1);
+}
+
+.slogan{
+  position: fixed;
+  top: 70px;
+  margin-right: 1%;
+}
+
+.column {
+  position: fixed;
+  width: 23.5%;
+  top: var(--topColumn);
+  min-width: 150px;
+}
+
+#projectsCont .projects .column {
+  overflow: auto;
+  height: calc(100% - var(--topColumn));
+}
+
+.colHov {
+  height: 50px;
+  overflow-y: hidden;
+  transition: height 0.2s;
+}
+
+.iframeCont {
+  padding:56.25% 0 0 0;
+  position:relative;
+  margin-bottom: 30px;
+}
+
+.iframeContVert {
+  padding:177.78% 0 0 0;
+  position:relative;
+  margin-bottom: 30px;
+}
+
+iframe {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+}
+
+img {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.col1 {
+  left: var(--pos1);
+}
+.col2 {
+  left: var(--pos2);
+}
+.col3 {
+  left: var(--pos3);
+}
+.col4 {
+  left: var(--pos4);
+}
+
+@media only screen and (max-width: 1080px) {
+
+  .desktop {
+    display: none;
+  }
+
+  html {
+    font-size: 36px;
+  }
+
+  h1 {
+    font-size: 36px;
+  }
+
+  .col2 {
+    left: var(--pos1);
+  }
+
+  .col3 {
+    left: var(--pos2);
+  }
+
+  .col4 {
+    left: var(--pos3);
+  } 
+
+  .column {
+    position: auto;
+    top: auto;
+    /* overflow-x: hidden; */
+  }
+
+  .colHov {
+    height: 90px;
+  }
+
+  .colHov:hover {
+    height: auto;
+    transition: height 0.2s;
+    overflow-y: auto;
+    position: absolute;
+  }
+
+}

@@ -1,0 +1,337 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>raphaelbenz</title>
+  <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.dom.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.sound.min.js"></script>
+  <script src="scripts/wortmarke.js"></script>
+  <script src="scripts/fold.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="assets/favicon.png">
+
+</head>
+
+<body>
+
+
+
+  <header>
+    <section class="desktop" id="wortmarke">
+    </section>
+    <section class="desktop" id="sloganCont">
+      <p>
+        <span class="slogan col1">audiovideo</span>
+        <span class="slogan col2">art &</span>
+        <span class="slogan col3">interaction</span>
+        <span class="slogan col4">design</span>
+      </p>
+    </section>
+  </header>
+
+  <main>
+
+    <section class="desktop column colHov col1" id="projects">
+      <h1 onclick="foldEvt('projects')">projects</h1>
+      <ul>
+        <li><span class="projLink" onclick="selProj('bildton')">Bildton</span></li>
+        <li><span class="projLink" onclick="selProj('love')">LOVE</span></li>
+        <li><span class="projLink" onclick="selProj('microsoft')">Microsoft Pop-Up Store</span></li>
+        <li><span class="projLink" onclick="selProj('soundcloud')">Soundcloud Artwork IRUBO</span></li>
+        <li><span class="projLink" onclick="selProj('trailerIrubo')">Trailer IRUBO</span></li>
+        <li><span class="projLink" onclick="selProj('spark')">Spark AR Effects</span></li>
+        <li><span class="projLink" onclick="selProj('zeitbilder')">Zeitbilder</span></li>
+        <li><span class="projLink" onclick="selProj('synth')">Synthualizer</span></li>
+        <li><span class="projLink" onclick="selProj('house')">Trailer I Love House</span></li>
+      </ul>
+
+    </section>
+
+    <section id="col2to4">
+
+      <section class="column colHov col2" id="gigs">
+        <h1 onclick="foldEvt('gigs')">gigs</h1>
+        <p>
+          Nothing planned..<br>
+          <a href="mailto:r.benz@live.com?subject=I%20would%20like%20to%20work%20with%20you%20please!"
+            alt="Testlink">Book me!</a>
+        </p>
+      </section>
+
+
+      <section class="column colHov col3" id="about">
+        <h1 onclick="foldEvt('about')">about me</h1>
+        <p>I am a content creator in the fields of creative coding, animation and interaction design. My passion lies
+          in
+          creating innovative and
+          functional applications for all kinds of challenges. I love to discover and learn new tools and bring
+          together
+          visual elements with audio experiences. </p>
+        <p>I'm co-founder, project manager and interaction and motion designer at <a href="http://nachtlicht.cc/"
+            alt="Nachtlicht" target="_blank">Nachtlicht Creative GmbH</a> in Zürich. I
+          finished my Bachelor in Visual Communication at the Academy of Art and Design Basel in Summer 2020.
+      </section>
+
+
+      <section class="column colHov col4" id="contact">
+        <h1 onclick="foldEvt('contact')">contact</h1>
+        <p>Raphael Benz
+          <br>
+          4053 Basel
+        </p>
+        <p>
+          <a href="mailto:r.benz@live.com" alt="mail">email</a>
+          <br>
+          <a href="https://www.instagram.com/rbvonrb/" alt="instagram" target="_blank">instagram</a>
+          <br>
+          <a href="https://vimeo.com/user37025594" alt="vimeo" target="_blank">vimeo</a>
+
+        </p>
+      </section>
+
+    </section>
+
+    <section class="destkop" id="projectsCont">
+
+      <section class="column col4">
+        <p><span onclick="closeProj()" id="close">X</span></p>
+      </section>
+
+      <section class="projects" id="bildton">
+
+        <section class="column col2">
+          <div class="iframeCont">
+            <iframe src="https://player.vimeo.com/video/453996298" frameborder="0" allow="autoplay; fullscreen"
+              allowfullscreen></iframe>
+          </div>
+        </section>
+
+        <section class="column col3">
+          <p>Year: 2020
+            <br>Context: BA Visual Communication
+            <br>Mentoring: Prof. Marion Fink, Jinsu Ahn, Ted Davis
+            <br><br></p>
+          <p>
+            For my Bachelor Thesis in Visual Communication, I built an interactive, browser-based Tool to turn moving
+            pictures into Music. </p>
+          <p>
+            Try it out here: <a href="https://bildton.ch" target="_blank">bildton.ch</a><br>
+            More info about the project <a href="https://bildton.ch/doku" target="_blank">here</a>.
+          </p>
+        </section>
+
+      </section>
+
+      <section class="projects" id="love">
+
+        <section class="column col2">
+          <div class="iframeCont">
+            <iframe src="https://player.vimeo.com/video/391195932" frameborder="0" allow="autoplay; fullscreen"
+              allowfullscreen></iframe>
+          </div>
+        </section>
+
+        <section class="column col3">
+          <p>Year: 2020
+            <br>Context: BA Visual Communication
+            <br>Mentoring: Dirk Koy
+            <br><br></p>
+          <p>
+            Title Sequence for Gaspar Noé's "LOVE".
+          </p>
+        </section>
+
+      </section>
+
+      <section class="projects" id="microsoft">
+
+        <section class="column col2">
+          <div class="iframeCont">
+            <iframe src="https://www.youtube.com/embed/SKveri5kPWg" frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </section>
+
+        <section class="column col3">
+          <p>Year: 2019
+            <br>Context: Commissioned Work with <a href="https://nachtlicht.cc/portfolio/microsoft-pop-up-house-2/"
+              target="_blank">Nachtlicht</a>
+            <br><br></p>
+          <p>
+            I programmed a light installation for a Microsoft Pop-Up Store in Zürich. Visitors could
+            change the room's color by touching the respective color of the Microsoft Logo on the store window.
+          </p>
+        </section>
+
+      </section>
+
+      <section class="projects" id="soundcloud">
+
+        <section class="column col2">
+          <img src="assets/projects/irubo_sc/verschluerft_zugetaped_soundcloud5.png" alt="soundcloud 5">
+          <img src="assets/projects/irubo_sc/verschluerft_zugetaped_soundcloud4.png" alt="soundcloud 4">
+          <img src="assets/projects/irubo_sc/verschluerft_zugetaped_soundcloud3.png" alt="soundcloud 3">
+          <img src="assets/projects/irubo_sc/verschluerft_zugetaped_soundcloud2.png" alt="soundcloud 2">
+          <img src="assets/projects/irubo_sc/verschluerft_zugetaped_soundcloud.png" alt="soundcloud 1">
+        </section>
+
+        <section class="column col3">
+          <p>Year: continuous
+            <br>Context: Freelance
+            <br><br></p>
+          <p>
+            Soundcloud cover art for the Zürich based collective IRUBO.
+          </p>
+        </section>
+
+      </section>
+
+      <section class="projects" id="trailerIrubo">
+
+        <section class="column col2">
+          <div class="iframeCont">
+            <iframe src="https://player.vimeo.com/video/456869694" frameborder="0" allow="autoplay; fullscreen"
+              allowfullscreen></iframe>
+          </div>
+          <div class="iframeCont">
+            <iframe src="https://player.vimeo.com/video/456871332" frameborder="0" allow="autoplay; fullscreen"
+              allowfullscreen></iframe>
+          </div>
+          <div class="iframeCont">
+            <iframe src="https://player.vimeo.com/video/456870594" frameborder="0" allow="autoplay; fullscreen"
+              allowfullscreen></iframe>
+          </div>
+          <div class="iframeCont">
+            <iframe src="https://player.vimeo.com/video/456870422" frameborder="0" allow="autoplay; fullscreen"
+              allowfullscreen></iframe>
+          </div>
+        </section>
+
+        <section class="column col3">
+          <p>Year: continuous
+            <br>Context: Freelance
+            <br><br></p>
+          <p>
+            Event Trailers for the Zürich based collective IRUBO.
+          </p>
+        </section>
+
+      </section>
+
+      <section class="projects" id="spark">
+
+
+        <section class="column col2">
+          <div class="iframeContVert">
+            <iframe src="https://player.vimeo.com/video/456679583" frameborder="0" allow="autoplay; fullscreen"
+              allowfullscreen></iframe></div>
+          <div class="iframeContVert">
+            <iframe src="https://player.vimeo.com/video/456680368" frameborder="0" allow="autoplay; fullscreen"
+              allowfullscreen></iframe>
+          </div>
+          <div class="iframeContVert">
+            <iframe src="https://player.vimeo.com/video/456679644" frameborder="0" allow="autoplay; fullscreen"
+              allowfullscreen></iframe>
+          </div>
+          <div class="iframeContVert">
+            <iframe src="https://player.vimeo.com/video/456679663" frameborder="0" allow="autoplay; fullscreen"
+              allowfullscreen></iframe>
+          </div>
+          <div class="iframeContVert">
+            <iframe src="https://player.vimeo.com/video/456679689" frameborder="0" allow="autoplay; fullscreen"
+              allowfullscreen></iframe>
+          </div>
+          <div class="iframeContVert">
+            <iframe src="https://player.vimeo.com/video/456679696" frameborder="0" allow="autoplay; fullscreen"
+              allowfullscreen></iframe>
+          </div>
+          <div class="iframeContVert">
+            <iframe src="https://player.vimeo.com/video/456679784" frameborder="0" allow="autoplay; fullscreen"
+              allowfullscreen></iframe>
+          </div>
+
+        </section>
+
+        <section class="column col3">
+
+          <p>Year: 2019<br>Context: BA Visual Communication<br>Mentoring: Ludwig Zeller<br><br></p>
+          <p>
+            Spark AR is an application provided by Facebook to create Augmented Reality effects and publish them on
+            Facebook and Instagram.
+          </p>
+          <p>
+            The goal of this semester project was to create AR effects beoynd the usual filters one can find on Social
+            Media and to experiment with this new tool.
+            The effects should be purely typographical/graphical or use the camera input and manipulate it.
+          </p>
+          <p>
+            I was very interested in the ability to recognize facial movements as well as the possibility to detect
+            and
+            recontextualize colors from the camera feed.
+          </p>
+
+
+        </section>
+
+      </section>
+
+      <section class="projects" id="zeitbilder">
+        <section class="column col2">
+          <div class="iframeCont">
+            <iframe src="https://player.vimeo.com/video/456901002" frameborder="0" allow="autoplay; fullscreen"
+              allowfullscreen></iframe>
+          </div>
+
+        </section>
+
+        <section class="column col3">
+          <p>Year: 2018<br>Context: BA Visual Communication<br>Mentoring: Dirk Koy<br><br></p>
+        </section>
+      </section>
+
+      <section class="projects" id="synth">
+        <section class="column col2">
+          <div class="iframeCont"><iframe src="https://player.vimeo.com/video/321698413" frameborder="0"
+              allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+        </section>
+
+        <section class="column col3">
+          <p>Year: 2019<br>Context: BA Visual Communication<br>Mentoring: Atelier Nord Basel<br><br></p>
+        </section>
+      </section>
+
+      <section class="projects" id="house">
+        <section class="column col2">
+          <div class="iframeCont"><iframe src="https://player.vimeo.com/video/173401479" frameborder="0"
+              allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+          <div class="iframeCont">
+            <iframe src="https://player.vimeo.com/video/157347946" frameborder="0" allow="autoplay; fullscreen"
+              allowfullscreen></iframe>
+          </div>
+          <div class="iframeCont">
+            <iframe src="https://player.vimeo.com/video/131591592" frameborder="0" allow="autoplay; fullscreen"
+              allowfullscreen></iframe>
+          </div>
+          <div class="iframeCont">
+            <iframe src="https://player.vimeo.com/video/126393555" frameborder="0" allow="autoplay; fullscreen"
+              allowfullscreen></iframe>
+          </div>
+        </section>
+
+        <section class="column col3">
+          <p>Year: 2015-2016<br>Context: Commissioned Work with Reckless Collective for Plaza Klub Zürich<br><br></p>
+        </section>
+      </section>
+
+    </section>
+
+  </main>
+
+
+</body>
+
+</html>
