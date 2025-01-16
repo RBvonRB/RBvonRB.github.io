@@ -8,13 +8,13 @@
 }
 
 @font-face {
-  font-family: "universRoman";
-  src: url(assets/fonts/universRom.otf);
+  font-family: "secretRegular";
+  src: url(assets/fonts/secret/secret-Regular-WebM.woff);
 }
 
 html {
   font-size: 20px;
-  font-family: universRoman;
+  font-family: secretRegular;
 }
 
 a {
