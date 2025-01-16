@@ -1,0 +1,297 @@
+@charset "utf-8";
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --colB: #000000;
+  --colBh: #353535;
+  --colW: #ffffff;
+  --colWh: #e2e2e2;
+  --col1: #e7e7e7;
+  --margin: 15px;
+  --padding: 15px;
+  --strW: 1px;
+  --imgW: 560px;
+  --imgH: 315px;
+}
+
+body {
+  font-family: neue-haas-grotesk-text, sans-serif;
+  font-style: normal;
+  overflow-wrap: break-word;
+}
+
+#main {
+  width: calc(100% - 300px - var(--padding) - var(--margin));
+  border: var(--strW) var(--colB) solid;
+  margin: var(--margin);
+  padding: var(--padding);
+  box-sizing: border-box;
+  min-width: 500px;
+  z-index: 1;
+}
+
+#right {
+  position: fixed;
+  width: 300px;
+  height: 100%;
+  right: 0;
+  margin: 0 var(--margin) 0 var(--margin);
+  z-index: 10;
+}
+
+#titel {
+  height:500px;
+}
+
+#toc {
+  left: 80%;
+  top: 0;
+  right: 0;
+  padding: 0 var(--padding);
+  border: var(--strW) var(--colB) solid;
+  box-sizing: border-box;
+  background-color: var(--colW);
+}
+
+#toc ol {
+  width: auto;
+}
+
+#toc ol a {
+  transition: background-color 0.1s;
+}
+
+#toc ol a {
+  text-decoration: none;
+}
+
+#toc ol a:hover {
+  text-decoration: underline var(--colB);
+}
+
+#toc ul a {
+  text-decoration: none;
+}
+
+#toc ul a:hover {
+  text-decoration: underline var(--colB);
+}
+
+
+p {
+  font-family: neue-haas-grotesk-text, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  max-width: var(--imgW);
+  margin-bottom: 70px;
+}
+
+ul {
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  max-width: var(--imgW);
+}
+
+.caption ul {
+  font-weight: 400;
+  font-style: italic;
+  font-size: 14px;
+  background-color: red;
+}
+
+ol {
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  max-width: var(--imgW);
+}
+
+a {
+  color: black;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 120px;
+  font-family: neue-haas-grotesk-display, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  margin: 0;
+  line-height: 0.9
+}
+
+
+h2 {
+  font-size: 36px;
+  font-family: neue-haas-grotesk-display, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+h3 {
+  font-size: 24px;
+  font-family: neue-haas-grotesk-display, sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.caption {
+  font-weight: 400;
+  font-style: italic;
+  font-size: 14px;
+  max-width: calc(2*var(--imgW));
+  margin-bottom: 20px;
+  /* max-width: var(--imgW); */
+  /* max-width: none; */
+}
+
+
+img{
+	width: 100%;
+}
+
+.chap {
+  border: var(--colB) var(--strW) solid;
+  margin-top: 70px;
+  padding: 0 var(--padding) var(--padding) var(--padding);
+  overflow: hidden;
+}
+
+
+.image {
+  width: var(--imgW);
+  height: var(--imgH);
+  display: inline-block;
+  object-fit: cover;
+  overflow: hidden;
+  margin: 0 var(--margin) var(--margin) 0;
+  /* border: var(--colB) var(--strW) solid; */
+}
+
+
+iframe {
+  width: var(--imgW);
+  height: var(--imgH);
+  margin: 0 var(--margin) var(--margin) 0;
+  background-color: var(--colB);
+  /* border: var(--colB) var(--strW) solid; */
+}
+
+.videoblock {
+  min-width: calc(var(--imgW) + (2*var(--padding)));
+  width: 100%;
+  margin: 0 var(--margin) var(--margin) 0;
+  padding: 8px var(--padding) var(--padding) var(--padding);
+  background-color: var(--colWh);
+  box-sizing: border-box;
+  /* border: var(--colB) var(--strW) solid; */
+  /* display: inline-block;  */
+}
+
+.videoblockSmall {
+  min-width: calc(var(--imgW) + (2*var(--padding)));
+  margin: 0 var(--margin) var(--margin) 0;
+  overflow: hidden;
+  /* display: inline-block; */
+}
+
+.videoblockSmall iframe {
+  width: calc(var(--imgW)*2);
+  height: calc(var(--imgH)*2);
+}
+
+.videoblockSmall .image {
+  width: calc(var(--imgW)*2);
+  height: calc(var(--imgH)*2);
+}
+
+::-webkit-scrollbar {
+  width: var(--margin);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--colW);
+  border: solid var(--colB);
+  border-width: var(--strW);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--colB);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--colBh);
+}
+
+#arrow {
+ display: none;
+}
+
+@media only screen and (max-width: 1600px) {
+
+  .videoblockSmall iframe {
+    width: var(--imgW);
+    height: var(--imgH);
+  }
+
+  .videoblockSmall .image {
+    width: var(--imgW);
+    height: var(--imgH);
+    }
+
+  body {
+    margin: 0 20px 0 20px;
+  }
+}
+
+/*iPad*/
+@media only screen and (max-width: 1080px) {
+  
+  body {
+    margin: 0 20px 0 0;
+  }
+
+  #main {
+    width: calc(100% - var(--margin));
+  }
+
+  
+  #right {
+    position: fixed;
+    bottom: 0px;
+    height: 60px;
+    width: 100%;
+    margin: 0;
+    transition: height 0.2s;
+  }
+
+
+  #toc {
+    left: 0;
+    height: 500px;
+  }
+
+  #tocOl {
+    margin-top: 30px;
+  }
+  
+  #arrow {
+    font-size: 24px;
+    display: block;
+    right: 20px;
+    top: 10px;
+    position: absolute;
+  }
+
+}
+

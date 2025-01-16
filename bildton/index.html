@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="libraries/p5.js"></script>
+    <script src="libraries/p5.sound.js"></script>
+    <script src="libraries/tone.js"></script>
+    <script src="libraries/webmidi.min.js"></script>
+    <script src="libraries/jsfeat-min.js"></script>
+    <!-- <script src="http://127.0.0.1:8081/socket.io/socket.io.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.png">
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+
+    <div id="thumbnailCon">
+        <div id="dropzone">
+            <h2>Select a source or drag&drop a movie file on here.</h2>
+
+        </div>
+    </div>
+
+    <div id="introCon">
+        <div id="intro">
+            <h1>
+                Bildton
+            </h1>
+            <p>
+
+                Welcome to Bildton, an online video sonification tool!
+            </p>
+            <p>
+                There are 5 modes which determine what parameters of the video are
+                analyzed.
+            </p>
+            <p>
+                Either start making music in your browser right away, or use the midi out to control your DAW or any
+                MIDI controlled soft- or hardware.
+            </p>
+            <p>
+                Set different parameters per mode, combine all 5 modes, and use the timeline and looper function at the
+                bottom to make your own loops.
+            </p>
+            <p>
+                Have fun!
+            </p>
+
+
+            <div class="buttoncontainer" id="startCon">
+                <input type="button" onclick="startEvt(this.value)" value="Ok" id="startBut">
+            </div>
+
+
+            <h2>
+                About
+            </h2>
+            <p>
+                Documentation: <a href="doku" target="_blank">www.bildton.ch/doku</a><br>
+                Portfolio: <a href="https://0764163012.ch" target="_blank">www.0764163012.ch</a><br>
+                Instagram: <a href="https://instagram.com/rbvonrb" target="_blank">@rbvonrb</a><br>
+                E-Mail: <a href="mailto:r.benz@live.com">r.benz@live.com</a>
+
+                <!--                 Documentation: <a>www.bildton.ch/doku</a><br>
+                Portfolio: <a>www.0764163012.ch</a><br>
+                Instagram: <a>@rbvonrb</a><br>
+                E-Mail: <a>r.benz@live.com</a> -->
+            </p>
+
+        </div>
+    </div>
+
+
+
+    <div id="UI">
+
+        <div id="playerCon">
+
+            <div class="buttoncontainer" id="playCon">
+                <input type="button" onclick="playEvent(this.value)" id="play">
+            </div>
+
+        </div>
+
+
+        <div class="dragCon" id="globalCon">
+
+            <div class="dragHeader" id="globalConheader">
+                <h3>global settings</h3>
+            </div>
+
+            <div class="controls">
+
+                <h2 style="margin-top: 14px">presets</h2>
+                <div class="selectCon">
+                    <select class="select" id="presetList" onchange="presetEvt(this.value)">
+                        <option value="preset1">preset 1</option>
+                        <option value="preset2">preset 2</option>
+                        <option value="preset3">preset 3</option>
+                        <option value="preset4">preset 4</option>
+                    </select>
+                    <!-- <span>presets</span> -->
+                </div>
+
+
+                <h2>audio</h2>
+
+
+                <label class="checkcontainer" id="muteCon">on/off
+                    <input type="checkbox" oninput="muteEvent(this.checked)" id="muteCheck" checked="true">
+                    <span class="checkmark"></span>
+                </label>
+
+                <div class="slidecontainer">
+                    <input type="range" oninput="volEvent(this.value)" min="0" max="127" value="60" class="slider"
+                        id="vol">
+                    <span>volume</span>
+                </div>
+
+                <h2>video</h2>
+                <label class="checkcontainer">loop
+                    <input type="checkbox" oninput="loopEvent(this.checked)" id="loopCheck" checked="true">
+                    <span class="checkmark"></span>
+                </label>
+
+                <div class="slidecontainer" id="spdCon">
+                    <input type="range" oninput="spdEvt(this.value)" min="0" max="127" value="25" class="slider"
+                        id="spdSl">
+                    <span>speed</span>
+                </div>
+
+
+
+                <label class="checkcontainer">source layer
+                    <input type="checkbox" oninput="sourceEvent(this.checked)" id="sourceCheck" checked="true">
+                    <span class="checkmark"></span>
+                </label>
+
+                <label class="checkcontainer">sample layer
+                    <input type="checkbox" oninput="layerEvent(this.checked)" id="layerCheck" checked="true">
+                    <span class="checkmark"></span>
+                </label>
+
+
+
+                <h2>midi</h2>
+                <div class="selectCon">
+                    <select class="select" id="midiInList" onchange="midiInEvt(this.value)">
+                        <option value="none">none</option>
+                    </select>
+                    <span>midi in</span>
+                </div>
+
+                <div class="selectCon">
+                    <select class="select" id="midiOutList" onchange="midiOutEvt(this.value)">
+                        <option value="none">none</option>
+                    </select>
+                    <span>midi out</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="dragCon" id="modeCon">
+            <div class="dragHeader" id="modeConheader">
+                <h3>mode settings</h3>
+            </div>
+
+            <div class="controls">
+
+                <div id="mode">
+
+                    <h2>mode</h2>
+
+                    <form name="modeRadio" onchange="modeChange(this.mode.value)" id="modeRadio">
+                        <label class="radiocontainer"><span class="modeTitle">brightness</span>
+                            <input type="radio" checked="checked" name="mode" value="1" id="mode1">
+                            <span class="radiocheckmark"></span>
+                        </label>
+                        <label class="radiocontainer"><span class="modeTitle">movement</span>
+                            <input type="radio" name="mode" value="2" id="mode2">
+                            <span class="radiocheckmark"></span>
+                        </label>
+                        <label class="radiocontainer"><span class="modeTitle">color</span>
+                            <input type="radio" name="mode" value="3" id="mode3">
+                            <span class="radiocheckmark"></span>
+                        </label>
+                        <label class="radiocontainer"><span class="modeTitle">edges</span>
+                            <input type="radio" name="mode" value="4" id="mode4">
+                            <span class="radiocheckmark"></span>
+                        </label>
+                    </form>
+
+                    <div id="volGroup">
+
+                        <div class="slidecontainer">
+                            <input type="range" oninput="vol1Evt(this.value)" min="0" max="127" value="127"
+                                class="slider" id="vol1">
+                        </div>
+                        <div class="slidecontainer">
+                            <input type="range" oninput="vol2Evt(this.value)" min="0" max="127" value="0" class="slider"
+                                id="vol2">
+                        </div>
+                        <div class="slidecontainer">
+                            <input type="range" oninput="vol3Evt(this.value)" min="0" max="127" value="0" class="slider"
+                                id="vol3">
+                        </div>
+                        <div class="slidecontainer">
+                            <input type="range" oninput="vol4Evt(this.value)" min="0" max="127" value="0" class="slider"
+                                id="vol4">
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div id="fold">
+
+                    <div class="modeSub" id="sampleCon">
+                        <h2>samples</h2>
+                        <div class="uiMode" id="ui1s">
+
+                            <div class="buttoncontainer" id="but1_1con">
+                                <input type="button" onclick="but1_1Evt(this.value)" value="randomize" id="but1_1">
+                            </div>
+                        </div>
+
+                        <div class="uiMode" id="ui2s">
+                        </div>
+
+                        <div class="uiMode" id="ui3s">
+                            <div class="buttoncontainer" id="but3_1con">
+                                <input type="button" onclick="but3_1Evt(this.value)" value="randomize" id="but3_1">
+                            </div>
+                        </div>
+
+                        <div class="uiMode" id="ui4s">
+                            <div class="buttoncontainer" id="but4_1con">
+                                <input type="button" onclick="but4_1Evt(this.value)" value="randomize" id="but4_1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modeSub" id="videoCon">
+
+                        <h2>video</h2>
+
+                        <div class="uiMode" id="ui1v">
+                            <div class="slidecontainer" id="sl1_1con">
+                                <input type="range" oninput="sl1_1Evt(this.value)" min="0" max="127" value="50"
+                                    class="slider" id="sl1_1">
+                                <span>threshold</span>
+                            </div>
+
+
+                            <label class="checkcontainer" id="tgl1_1con">invert
+                                <input type="checkbox" oninput="tgl1_1Evt(this.checked)" id="tgl1_1">
+                                <span class="checkmark"></span>
+                            </label>
+
+                        </div>
+
+
+                        <div class="uiMode" id="ui2v">
+                            <div class="slidecontainer" id="sl2_1con">
+                                <input type="range" oninput="sl2_1Evt(this.value)" min="0" max="127" value="22"
+                                    class="slider" id="sl2_1">
+                                <span>threshold</span>
+                            </div>
+                        </div>
+
+
+                        <div class="uiMode" id="ui3v">
+
+
+                        </div>
+
+
+                        <div class="uiMode" id="ui4v">
+
+                            <div class="slidecontainer" id="sl4_1con">
+                                <input type="range" oninput="sl4_1Evt(this.value)" min="0" max="127" value="50"
+                                    class="slider" id="sl4_1">
+                                <span>blur</span>
+                            </div>
+
+                            <div class="slidecontainer" id="sl4_2con">
+                                <input type="range" oninput="sl4_2Evt(this.value)" min="0" max="127" value="50"
+                                    class="slider" id="sl4_2">
+                                <span>low Threshold</span>
+                            </div>
+
+                            <div class="slidecontainer" id="sl4_3con">
+                                <input type="range" oninput="sl4_3Evt(this.value)" min="0" max="127" value="50"
+                                    class="slider" id="sl4_3">
+                                <span>high Threshold</span>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="modeSub" id="audioCon">
+
+                        <h2>audio</h2>
+
+
+                        <div class="uiMode" id="ui1a">
+
+
+                            <div class="selectCon">
+                                <select class="select" id="asel1_1" onchange="asel1_1Evt(this.value)">
+                                    <option value="sine" selected>sine</option>
+                                    <option value="square">square</option>
+                                    <option value="sawtooth">sawtooth</option>
+                                    <option value="triangle">triangle</option>
+                                </select>
+                                <span>sound</span>
+                            </div>
+
+                            <div class="slidecontainer" id="asl1_1con">
+                                <input type="range" oninput="asl1_1Evt(this.value)" min="0" max="127" value="50"
+                                    class="slider" id="asl1_1">
+                                <span>pitch</span>
+                            </div>
+
+                            <div class="slidecontainer" id="asl1_2con">
+                                <input type="range" oninput="asl1_2Evt(this.value)" min="0" max="127" value="50"
+                                    class="slider" id="asl1_2">
+                                <span>interval</span>
+                            </div>
+
+                            <div class="slidecontainer" id="asl1_3con">
+                                <input type="range" oninput="asl1_3Evt(this.value)" min="0" max="127" value="127"
+                                    class="slider" id="asl1_3">
+                                <span>reverb</span>
+                            </div>
+
+                            <div class="slidecontainer" id="asl1_4con">
+                                <input type="range" oninput="asl1_4Evt(this.value)" min="0" max="127" value="127"
+                                    class="slider" id="asl1_4">
+                                <span>delay</span>
+                            </div>
+
+                        </div>
+
+                        <div class="uiMode" id="ui2a">
+
+
+                            <div class="selectCon">
+                                <select class="select" id="asel2_1" onchange="asel2_1Evt(this.value)">
+                                    <option value="sine">sine</option>
+                                    <option value="square" selected>square</option>
+                                    <option value="sawtooth">sawtooth</option>
+                                    <option value="triangle">triangle</option>
+                                    <option value="noise">noise</option>
+                                </select>
+                                <span>sound</span>
+                            </div>
+
+
+                            <div class="slidecontainer" id="asl2_1con">
+                                <input type="range" oninput="asl2_1Evt(this.value)" min="0" max="127" value="50"
+                                    class="slider" id="asl2_1">
+                                <span>pitch</span>
+                            </div>
+
+
+                            <div class="slidecontainer" id="asl2_2con">
+                                <input type="range" oninput="asl2_2Evt(this.value)" min="0" max="127" value="0"
+                                    class="slider" id="asl2_2">
+                                <span>highpass</span>
+                            </div>
+
+                            <div class="slidecontainer" id="asl2_3con">
+                                <input type="range" oninput="asl2_3Evt(this.value)" min="0" max="127" value="50"
+                                    class="slider" id="asl2_3">
+                                <span>delay</span>
+                            </div>
+
+
+
+
+                        </div>
+
+
+                        <div class="uiMode" id="ui3a">
+                            <div class="selectCon">
+                                <select class="select" id="asel3_1" onchange="asel3_1Evt(this.value)">
+                                    <option value="sine">sine</option>
+                                    <option value="square" selected>square</option>
+                                    <option value="sawtooth">sawtooth</option>
+                                    <option value="triangle">triangle</option>
+                                </select>
+                                <span>sound</span>
+                            </div>
+
+                            <div class="slidecontainer" id="asl3_1con">
+                                <input type="range" oninput="asl3_1Evt(this.value)" min="0" max="127" value="50"
+                                    class="slider" id="asl3_1">
+                                <span>pitch</span>
+                            </div>
+
+                            <!-- <div class="slidecontainer" id="asl3_2con">
+                                <input type="range" oninput="asl3_2Evt(this.value)" min="0" max="127" value="50"
+                                    class="slider" id="asl3_2">
+                                <span>range</span>
+                            </div>> -->
+
+                            <div class="slidecontainer" id="asl3_3con">
+                                <input type="range" oninput="asl3_3Evt(this.value)" min="0" max="127" value="127"
+                                    class="slider" id="asl3_3">
+                                <span>lowpass</span>
+                            </div>
+
+
+                            <div class="slidecontainer" id="asl3_4con">
+                                <input type="range" oninput="asl3_4Evt(this.value)" min="0" max="127" value="0"
+                                    class="slider" id="asl3_4">
+                                <span>highpass</span>
+                            </div>
+                        </div>
+
+
+                        <div class="uiMode" id="ui4a">
+
+                            <div class="selectCon">
+                                <select class="select" id="asel4_1" onchange="asel4_1Evt(this.value)">
+                                    <option value="sine">sine</option>
+                                    <option value="square">square</option>
+                                    <option value="sawtooth">sawtooth</option>
+                                    <option value="triangle">triangle</option>
+                                </select>
+                                <span>sound</span>
+                            </div>
+
+                            <div class="slidecontainer" id="asl4_1con">
+                                <input type="range" oninput="asl4_1Evt(this.value)" min="0" max="127" value="50"
+                                    class="slider" id="asl4_1">
+                                <span>pitch</span>
+                            </div>
+
+                            <div class="slidecontainer" id="asl4_2con">
+                                <input type="range" oninput="asl4_2Evt(this.value)" min="0" max="127" value="50"
+                                    class="slider" id="asl4_2">
+                                <span>interval</span>
+                            </div>
+
+                            <div class="slidecontainer" id="asl4_3con">
+                                <input type="range" oninput="asl4_3Evt(this.value)" min="0" max="127" value="127"
+                                    class="slider" id="asl4_3">
+                                <span>reverb</span>
+                            </div>
+
+                            <div class="slidecontainer" id="asl4_4con">
+                                <input type="range" oninput="asl4_4Evt(this.value)" min="0" max="127" value="127"
+                                    class="slider" id="asl4_4">
+                                <span>delay</span>
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+        <div id="menu">
+            <div class="buttoncontainer menuBut" id="thumbsCon">
+                <input type="button" onclick="thumbEvt(this.value)" value="pick source" id="thumbsBut">
+            </div>
+
+            <div class="buttoncontainer menuBut" id="help">
+                <input type="button" onclick="helpEvt(this.value)" value="?" id="helpBut">
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+    <div id="scripts">
+        <script src="scripts/opticalflow/flow.js"></script>
+        <script src="scripts/opticalflow/Graph.js"></script>
+        <script src="scripts/main_tone.js"></script>
+        <script src="scripts/main_midi.js"></script>
+        <script src="scripts/osc.js"></script>
+        <script src="scripts/ui_new.js"></script>
+        <script src="scripts/mode1.js"></script>
+        <script src="scripts/sound1.js"></script>
+        <script src="scripts/mode2.js"></script>
+        <script src="scripts/sound2.js"></script>
+        <script src="scripts/mode3.js"></script>
+        <script src="scripts/sound3.js"></script>
+        <script src="scripts/mode4.js"></script>
+        <script src="scripts/sound4.js"></script>
+        <script src="scripts/main.js"></script>
+        <script src="scripts/presets.js"></script>
+    </div>
+
+
+
+</body>
+
+</html>
